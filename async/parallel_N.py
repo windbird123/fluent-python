@@ -21,9 +21,7 @@ async def main():
 
     try:
         async with asyncio.TaskGroup() as tg:
-            for x in tasks:
-                t = tg.create_task(run_task(x))
-                tracks.append(t)
+            tracks = [tg.create_task(run_task(x)) for x in tasks]
     except* Exception as eg:
         for exc in eg.exceptions:
             print(f"task 예외: {exc!r}")
